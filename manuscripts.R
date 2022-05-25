@@ -70,19 +70,22 @@ upset(data, sets =c("MCC","MNC","Degree","EPC",
 ####### logistic regression analysis
 library(rms) 
 fit <- glm(status~FN1+CD44+C1QB+C1QA, data=data, family = binomial(link="logit"), x=T)
-
 ################# Correlation analysis
 library(dplyr)
-dd = cor.test(genedata,as.numeric(data[,i]),method="pearson")
-##
-ggplot(bb,aes(COL6A3,FN1))+
-  geom_point(col="#984ea3")+
-  geom_smooth(method=lm, se=T,na.rm=T, fullrange=T,size=2,col="#fdc086")+
-  geom_rug(col="#7fc97f")+
-  stat_cor(method = "pearson",digits = 3,size=5)+
-  theme_bw()+
-  theme(plot.title = element_text(hjust = 0.5),
-        plot.margin = margin(1, 1, 1, 1, "cm"))
+gene <- "FN1"
+genedata <- as.numeric(data[,gene])
+
+for(i in 1:length(genelist)){
+  print(i)
+  dd = cor.test(genedata,as.numeric(data[,i]),method="pearson")
+  correlation[i,1] = gene
+  correlation[i,2] = genelist[i]
+  correlation[i,3] = dd$estimate
+  correlation[i,4] = dd$p.value
+}
+
+colnames(correlation) <- c("FN1","symbol","cor","p.value")
+
 
 cor_data <- correlation %>% 
   
