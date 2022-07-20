@@ -2,13 +2,6 @@
 ###https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE30528&format=file
 ###https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE47183&format=file
 ###https://www.ncbi.nlm.nih.gov/geo/download/?acc=GSE104948&format=file
-library(oligo) 
-dir='/GSE_RAW/'
-setwd(dir)
-celFiles <- list.celfiles(listGzipped = T)
-celFiles
-affyRaw <- read.celfiles( celFiles )
-eset <- rma(affyRaw)
 ###### differential gene analysis was performed on each dataset separately
 library(limma)
 fit <- lmFit(exprSet,design)
