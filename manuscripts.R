@@ -50,16 +50,6 @@ gs=ups[ups$Score < 0.05,1]
 
 ##############
 ## STRING web tool and Cytoscape software
-##
-library(UpSetR) 
-upset(data, sets =c("MCC","MNC","Degree","EPC",         
-                    "Bottleneck","EcCentricity","Closeness" ,   "Radiality",   
-                    "Betweenness","Stress" ), nintersects = 30, mb.ratio = c(0.5, 0.5),
-      order.by = c("freq", "degree"), 
-      queries =list(list(query=intersects, params=list("MCC","MNC","Degree","EPC",         
-                                                       "Bottleneck","EcCentricity","Closeness" ,   "Radiality",   
-                                                       "Betweenness","Stress" ), color="red", active=TRUE)),
-      decreasing = c(TRUE,FALSE))
 ####### logistic regression analysis
 library(rms) 
 fit <- glm(status~FN1+CD44+C1QB+C1QA, data=data, family = binomial(link="logit"), x=T)
